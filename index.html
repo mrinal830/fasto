@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fasto - Drone Delivery E-commerce</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #87CEEB, #ffffff);
+            color: #333;
+        }
+
+        header {
+            background: #1E90FF;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        header h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+
+        header nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        header nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: #fff700;
+            font-size: 1.25em;
+        }
+
+        #menu-toggle {
+            display: none;
+            background: #1E90FF;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            text-align: center;
+            background: url('https://static.vecteezy.com/system/resources/thumbnails/028/134/077/small_2x/a-drone-carrying-a-package-ready-for-delivery-photo.jpg')no-repeat center/cover;
+            color: white;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero .content {
+            z-index: 2;
+        }
+
+        .hero h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .hero button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background: #FF4500;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .hero button:hover {
+            background: #FF6347;
+        }
+
+        section {
+            padding: 40px;
+            text-align: center;
+        }
+
+        section h3 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #1E90FF;
+        }
+
+        .products {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .product {
+            width: 300px;
+            padding: 20px;
+            background: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .product img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .product h4 {
+            margin: 15px 0 10px;
+            color: #333;
+        }
+
+        .product button {
+            padding: 10px 15px;
+            background: #1E90FF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .product button:hover {
+            background: #4682B4;
+        }
+
+        footer {
+            background: #1E90FF;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        .drone-animation {
+            width: 120px;
+            position: absolute;
+            animation: fly 6s infinite ease-in-out;
+            z-index: 3;
+        }
+
+        @keyframes fly {
+            0% {
+                left: -10%;
+                top: 30%;
+            }
+            50% {
+                left: 50%;
+                top: 5%;
+            }
+            100% {
+                left: 110%;
+                top: 30%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header nav {
+                display: none;
+                flex-direction: column;
+                background: #1E90FF;
+                position: absolute;
+                top: 60px;
+                right: 10px;
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+            header nav a {
+                margin: 10px 0;
+                color: white;
+                text-align: center;
+            }
+
+            #menu-toggle {
+                display: block;
+            }
+
+            .hero h2 {
+                font-size: 2em;
+            }
+
+            .hero button {
+                font-size: 1em;
+                padding: 10px 15px;
+            }
+
+            .products {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .product {
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 1.5em;
+            }
+
+            .hero button {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        
+        <h1>Fasto</h1>
+        <button id="menu-toggle">&#9776;</button>
+        
+        <nav id="nav-links">    
+            <a href="#">Home</a>
+            <a href="#products">Products</a>
+            <a href="#contact">Contact</a>
+        <img id="img" src="WhatsApp Image 2025-01-18 at 19.32.49_e6c4f7e8.jpg" alt="Bootstrap" width="45" height="40" >
+           
+                   
+      
+    </header>
+
+    <div class="hero">
+        <div class="content">
+            <div class="text-container">
+                <span class="animated-text">India's 1st Drone Devivery Service</span>
+              </div>
+            <h2>Shop and Get It Delivered by Drone!</h2>
+           <a href="product.html"><button>Start Shopping</button></a> 
+        </div>
+        <img id="i1" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVCu4z015nUCPSIcu8-ZUFeTN_x08UtCDEow&s" alt="Drone" class="drone-animation" >
+    </div>
+
+    <section id="products">
+        <h3>Our Products</h3>
+        <div class="products">
+            <div class="product">
+                <img src="https://static3.depositphotos.com/1000142/109/i/450/depositphotos_1097789-stock-photo-lot-of-medicines.jpg" alt="Product 1">
+                <h4>Medicin</h4>
+                <p class="p1">Free Devivery</p>
+                <button>Buy Now</button>
+            </div>
+            <div class="product">
+                <img src="https://thumbs.dreamstime.com/b/many-used-modern-electronic-gadgets-use-white-floor-reuse-recycle-concept-top-view-164230611.jpg" alt="Product 2">
+                <h4>Electronics Items</h4>
+                <p class="p1">Free Devivery</p>
+                <button>Buy Now</button>
+            </div>
+            <div class="product">
+                <img src="https://media.licdn.com/dms/image/v2/D5612AQFT1VcO3EWoEw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1735211705826?e=2147483647&v=beta&t=h5a7ev-KAogkeHYI4POzg5szD70L4QLEqgItJmZVHUo" alt="Product 3">
+                <h4>Food Items</h4>
+                <p class="p1">Free Devivery</p>
+                <button>Buy Now</button>
+            </div>
+            <div class="product">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHNnZKnTEgvYnrtK_PvpcmHiXbEZEC6QexvQ&s" alt="Product 3">
+                <h4>Clothes</h4>
+                <p class="p1">Free Devivery</p>
+                <button>Buy Now</button>
+            </div>
+            <div class="product">
+                <img src="https://i.pinimg.com/736x/2e/cf/60/2ecf60ee0ebdeeff851e90f516f3ed7e.jpg" alt="Product 3">
+                <h4>Glocery Items</h4>
+                <p class="p1">Free Devivery</p>
+               <a href="medicin.html"> <button>Buy Now</button></a>
+            </div>
+   
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Fasto. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            const nav = document.getElementById('nav-links');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+    
+</body>
+</html>

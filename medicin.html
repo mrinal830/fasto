@@ -1,0 +1,387 @@
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Continuous Product Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f3f4f6, #ffffff);
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            animation: slideIn 1s ease-out;
+        }
+
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            animation: fadeIn 1.5s;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: transform 0.5s, box-shadow 0.5s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .product-title {
+            font-size: 20px;
+            margin: 10px 0;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 18px;
+            color: #007bff;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: zoomIn 0.3s ease;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #007bff;
+        }
+
+        .modal-header {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-body {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .reviews {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .reviews p {
+            margin: 5px 0;
+        }
+
+        .modal-actions {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .modal-actions button {
+            padding: 12px 25px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .modal-actions button:hover {
+            background: linear-gradient(90deg, #0056b3, #003f7f);
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">Medicin Page</div>
+    <div class="product-container">
+        <div class="product-card" onclick="openModal('Product 1', 'This is a great product. It has a sleek design and high durability.', '$19.99', ['Excellent quality!', 'Value for money.', 'Highly recommend!'])">
+            <img src="https://via.placeholder.com/250" alt="Product 1" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Product 1</div>
+                <div class="product-price">$19.99</div>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="openModal('Product 2', 'This product is awesome! Perfect for daily use.', '$29.99', ['Amazing features!', 'Worth every penny.', 'Best in the market!'])">
+            <img src="https://via.placeholder.com/250" alt="Product 2" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Product 2</div>
+                <div class="product-price">$29.99</div>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="openModal('Product 3', 'You will love this product. It is eco-friendly and stylish.', '$39.99', ['Eco-friendly and beautiful.', 'Stylish design!', 'Great value!'])">
+            <img src="https://via.placeholder.com/250" alt="Product 3" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Product 3</div>
+                <div class="product-price">$39.99</div>
+            </div>
+        </div>
+    </div>
+    <div class="product-container">
+        <div class="product-card" onclick="openModal('Product 1', 'This is a great product. It has a sleek design and high durability.', '$19.99', ['Excellent quality!', 'Value for money.', 'Highly recommend!'])">
+            <img src="https://via.placeholder.com/250" alt="Product 1" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Product 1</div>
+                <div class="product-price">$19.99</div>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="openModal('Product 2', 'This product is awesome! Perfect for daily use.', '$29.99', ['Amazing features!', 'Worth every penny.', 'Best in the market!'])">
+            <img src="https://via.placeholder.com/250" alt="Product 2" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Product 2</div>
+                <div class="product-price">$29.99</div>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="openModal('Product 3', 'You will love this product. It is eco-friendly and stylish.', '$39.99', ['Eco-friendly and beautiful.', 'Stylish design!', 'Great value!'])">
+            <img src="https://via.placeholder.com/250" alt="Product 3" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Product 3</div>
+                <div class="product-price">$39.99</div>
+            </div>
+        </div>
+    </div>
+    <div class="product-container">
+        <div class="product-card" onclick="openModal('Product 1', 'This is a great product. It has a sleek design and high durability.', '$19.99', ['Excellent quality!', 'Value for money.', 'Highly recommend!'])">
+            <img src="https://via.placeholder.com/250" alt="Product 1" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Product 1</div>
+                <div class="product-price">$19.99</div>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="openModal('Product 2', 'This product is awesome! Perfect for daily use.', '$29.99', ['Amazing features!', 'Worth every penny.', 'Best in the market!'])">
+            <img src="https://via.placeholder.com/250" alt="Product 2" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Product 2</div>
+                <div class="product-price">$29.99</div>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="openModal('Product 3', 'You will love this product. It is eco-friendly and stylish.', '$39.99', ['Eco-friendly and beautiful.', 'Stylish design!', 'Great value!'])">
+            <img src="https://via.placeholder.com/250" alt="Product 3" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Product 3</div>
+                <div class="product-price">$39.99</div>
+            </div>
+        </div>
+    </div>
+    <div class="product-container">
+        <div class="product-card" onclick="openModal('Product 1', 'This is a great product. It has a sleek design and high durability.', '$19.99', ['Excellent quality!', 'Value for money.', 'Highly recommend!'])">
+            <img src="https://via.placeholder.com/250" alt="Product 1" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Product 1</div>
+                <div class="product-price">$19.99</div>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="openModal('Product 2', 'This product is awesome! Perfect for daily use.', '$29.99', ['Amazing features!', 'Worth every penny.', 'Best in the market!'])">
+            <img src="https://via.placeholder.com/250" alt="Product 2" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Product 2</div>
+                <div class="product-price">$29.99</div>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="openModal('Product 3', 'You will love this product. It is eco-friendly and stylish.', '$39.99', ['Eco-friendly and beautiful.', 'Stylish design!', 'Great value!'])">
+            <img src="https://via.placeholder.com/250" alt="Product 3" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Product 3</div>
+                <div class="product-price">$39.99</div>
+            </div>
+        </div>
+    </div>
+    <div class="product-container">
+        <div class="product-card" onclick="openModal('Product 1', 'This is a great product. It has a sleek design and high durability.', '$19.99', ['Excellent quality!', 'Value for money.', 'Highly recommend!'])">
+            <img src="https://via.placeholder.com/250" alt="Product 1" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Product 1</div>
+                <div class="product-price">$19.99</div>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="openModal('Product 2', 'This product is awesome! Perfect for daily use.', '$29.99', ['Amazing features!', 'Worth every penny.', 'Best in the market!'])">
+            <img src="https://via.placeholder.com/250" alt="Product 2" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Product 2</div>
+                <div class="product-price">$29.99</div>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="openModal('Product 3', 'You will love this product. It is eco-friendly and stylish.', '$39.99', ['Eco-friendly and beautiful.', 'Stylish design!', 'Great value!'])">
+            <img src="https://via.placeholder.com/250" alt="Product 3" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Product 3</div>
+                <div class="product-price">$39.99</div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="modal" id="product-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-header" id="modal-title"></div>
+            <div class="modal-body" id="modal-description"></div>
+            <div class="modal-body" id="modal-price"></div>
+            <div class="reviews" id="modal-reviews"></div>
+            <div class="modal-actions">
+                <button>Buy Now</button>
+                <button>Add to Cart</button>
+                <button>Add to Favourites</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+    
+        function openModal(title, description, price, reviews) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-description').innerText = description;
+            document.getElementById('modal-price').innerText = `Price: ${price}`;
+            const reviewsContainer = document.getElementById('modal-reviews');
+            reviewsContainer.innerHTML = '<h4>Reviews:</h4>';
+            reviews.forEach(review => {
+                const reviewElement = document.createElement('p');
+                reviewElement.innerText = review;
+                reviewsContainer.appendChild(reviewElement);
+            });
+    
+            // Dynamically attach the product data to the "Add to Cart" button
+            const addToCartButton = document.querySelector('.modal-actions button:nth-child(2)');
+            addToCartButton.onclick = () => addToCart(title, price);
+    
+            document.getElementById('product-modal').style.display = 'flex';
+        }
+    
+        function closeModal() {
+            document.getElementById('product-modal').style.display = 'none';
+        }
+    
+        function addToCart(productName, productPrice) {
+            // Add product to cart array
+            cart.push({ name: productName, price: productPrice });
+    
+            // Save the cart in local storage to pass it to the cart page
+            localStorage.setItem('cart', JSON.stringify(cart));
+    
+            // Redirect to the cart page
+            window.location.href = 'cart.html';
+        }
+        function openModal(title, description, price, reviews) {
+    document.getElementById('modal-title').innerText = title;
+    document.getElementById('modal-description').innerText = description;
+    document.getElementById('modal-price').innerText = `Price: ${price}`;
+    const reviewsContainer = document.getElementById('modal-reviews');
+    reviewsContainer.innerHTML = '<h4>Reviews:</h4>';
+    reviews.forEach(review => {
+        const reviewElement = document.createElement('p');
+        reviewElement.innerText = review;
+        reviewsContainer.appendChild(reviewElement);
+    });
+
+    // Set up "Buy Now" button to redirect to order page with details
+    const buyNowButton = document.querySelector('.modal-actions button:nth-child(1)');
+    buyNowButton.onclick = () => {
+        localStorage.setItem('selectedProduct', JSON.stringify({ title, price }));
+        window.location.href = 'order.html';
+    };
+
+    document.getElementById('product-modal').style.display = 'flex';
+}
+
+    </script> 
+</body>
+</html>

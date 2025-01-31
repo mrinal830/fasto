@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f9f9f9, #e6f7ff);
+            animation: fadeIn 1.5s;
+        }
+
+        .order-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .order-header {
+            font-size: 28px;
+            font-weight: bold;
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: slideIn 1s;
+        }
+
+        .order-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .order-form label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .order-form input, .order-form textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .order-form textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        .order-summary {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f1f1f1;
+            border-radius: 10px;
+            font-size: 16px;
+            color: #555;
+            text-align: center;
+        }
+
+        .submit-button {
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            text-align: center;
+        }
+
+        .submit-button:hover {
+            background: linear-gradient(90deg, #0056b3, #003f7f);
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="order-container">
+        <div class="order-header">Order Details</div>
+        <div id="order-summary" class="order-summary"></div>
+        <form class="order-form">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" placeholder="Enter your full name" required>
+            
+            <label for="address">Address:</label>
+            <textarea id="address" placeholder="Enter your shipping address" required></textarea>
+            
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" placeholder="Enter your phone number" required>
+            
+            <button type="submit" class="submit-button">Place Order</button>
+        </form>
+    </div>
+
+    <script>
+     // Function to handle adding the product to the cart
+     function addToCart() {
+            const product = {
+                title: "Product Title", // Example product title
+                price: "$49.99", // Example product price
+                description: "This is an amazing product that you will love.", // Example product description
+            };
+            window.location.href = 'cart.html';
+            // Save product data to localStorage (can have multiple items in the cart if needed)
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+           
+            alert("Product added to cart!");
+        }
+
+        // Function to handle the Buy Now button, redirecting to the order details page
+        function buyNow() {
+            const product = {
+                title: "Product Title",
+                price: "$49.99",
+                description: "This is an amazing product that you will love.",
+            };
+
+            // Save the product data to localStorage for checkout
+            localStorage.setItem('selectedProduct', JSON.stringify(product));
+
+            // Redirect to the order details page for checkout
+            window.location.href = 'order-details.html';
+        }
+    </script>
+</body>
+</html>

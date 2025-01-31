@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Continuous Product Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f3f4f6, #ffffff);
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            width: 250px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .modal-content img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        .close-modal {
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .modal-actions button {
+            padding: 10px 15px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Welcome to the Product Page</div>
+    <div class="product-container">
+        <!-- Product 1 -->
+        <div class="product-card" onclick="openModal('Watch', 'Trendy watch for men', 399, 'https://rukminim2.flixcart.com/image/612/612/xif0q/watch/0/j/d/-original-imah2ggwncy5sfz3.jpeg?q=70')">
+            <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/watch/0/j/d/-original-imah2ggwncy5sfz3.jpeg?q=70" class="product-image">
+            <div class="product-title">Trending Watch</div>
+            <div class="product-price">&#8377; 399</div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card" onclick="openModal('Headphones', 'Wireless Headphones for Music Lovers', 1299, 'https://rukminim2.flixcart.com/image/612/612/j6d5vww0/headphone/s/r/f/-original-imae8jhspsu7gqgz.jpeg?q=70')">
+            <img src="https://rukminim2.flixcart.com/image/612/612/j6d5vww0/headphone/s/r/f/-original-imae8jhspsu7gqgz.jpeg?q=70" class="product-image">
+            <div class="product-title">Wireless Headphones</div>
+            <div class="product-price">&#8377; 1299</div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card" onclick="openModal('Shoes', 'Running Shoes for Men', 799, 'https://rukminim2.flixcart.com/image/612/612/kxevv680/shoe/x/d/k/-original-imagawbb5hdtahnt.jpeg?q=70')">
+            <img src="https://rukminim2.flixcart.com/image/612/612/kxevv680/shoe/x/d/k/-original-imagawbb5hdtahnt.jpeg?q=70" class="product-image">
+            <div class="product-title">Running Shoes</div>
+            <div class="product-price">&#8377; 799</div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-card" onclick="openModal('Smartphone', 'Smartphone with Amazing Features', 15999, 'https://rukminim2.flixcart.com/image/612/612/kzv9ecw0/smartphone/q/x/j/-original-imagb7v5xzzhft5r.jpeg?q=70')">
+            <img src="https://rukminim2.flixcart.com/image/612/612/kzv9ecw0/smartphone/q/x/j/-original-imagb7v5xzzhft5r.jpeg?q=70" class="product-image">
+            <div class="product-title">Smartphone</div>
+            <div class="product-price">&#8377; 15999</div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product-card" onclick="openModal('Tablet', '10-inch Tablet with Large Display', 8999, 'https://rukminim2.flixcart.com/image/612/612/xif0q/tablet/2/s/t/-original-imagnm3jeapwpggx.jpeg?q=70')">
+            <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/tablet/2/s/t/-original-imagnm3jeapwpggx.jpeg?q=70" class="product-image">
+            <div class="product-title">10-inch Tablet</div>
+            <div class="product-price">&#8377; 8999</div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="product-card" onclick="openModal('Laptop', 'Gaming Laptop with High Performance', 54999, 'https://rukminim2.flixcart.com/image/612/612/xif0q/laptop/s/z/l/-original-imaghv6u9mhyv6hz.jpeg?q=70')">
+            <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/laptop/s/z/l/-original-imaghv6u9mhyv6hz.jpeg?q=70" class="product-image">
+            <div class="product-title">Gaming Laptop</div>
+            <div class="product-price">&#8377; 54999</div>
+        </div>
+
+        <!-- Product 7 -->
+        <div class="product-card" onclick="openModal('Bag', 'Leather Backpack for Professionals', 1999, 'https://rukminim2.flixcart.com/image/612/612/jvsm3bk0/bag/8/z/a/-original-imafhhgyc8b9gnsa.jpeg?q=70')">
+            <img src="https://rukminim2.flixcart.com/image/612/612/jvsm3bk0/bag/8/z/a/-original-imafhhgyc8b9gnsa.jpeg?q=70" class="product-image">
+            <div class="product-title">Leather Backpack</div>
+            <div class="product-price">&#8377; 1999</div>
+        </div>
+
+        <!-- Product 8 -->
+        <div class="product-card" onclick="openModal('Camera', 'DSLR Camera with High Resolution', 49999, 'https://rukminim2.flixcart.com/image/612/612/kzfnk280/camera/9/q/h/-original-imagfaakvvky2pww.jpeg?q=70')">
+            <img src="https://rukminim2.flixcart.com/image/612/612/kzfnk280/camera/9/q/h/-original-imagfaakvvky2pww.jpeg?q=70" class="product-image">
+            <div class="product-title">DSLR Camera</div>
+            <div class="product-price">&#8377; 49999</div>
+        </div>
+
+        <!-- Product 9 -->
+        <div class="product-card" onclick="openModal('Smartwatch', 'Smartwatch with Fitness Tracking', 2999, 'https://rukminim2.flixcart.com/image/612/612/xif0q/smartwatch/g/j/7/-original-imagzzfnvhuzh5jh.jpeg?q=70')">
+            <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/smartwatch/g/j/7/-original-imagzzfnvhuzh5jh.jpeg?q=70" class="product-image">
+            <div class="product-title">Smartwatch</div>
+            <div class="product-price">&#8377; 2999</div>
+        </div>
+
+        <!-- Product 10 -->
+        <div class="product-card" onclick="openModal('Earphones', 'Wireless Earphones with Noise Cancellation', 1499, 'https://rukminim2.flixcart.com/image/612/612/k5o5c0w0/earphone/8/l/j/-original-imaf7k8f8ahszp8b.jpeg?q=70')">
+            <img src="https://rukminim2.flixcart.com/image/612/612/k5o5c0w0/earphone/8/l/j/-original-imaf7k8f8ahszp8b.jpeg?q=70" class="product-image">
+            <div class="product-title">Wireless Earphones</div>
+            <div class="product-price">&#8377; 1499</div>
+        </div>
+    </div>
+
+    <div class="modal" id="product-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <img id="modal-image" src="" alt="Product Image">
+            <h2 id="modal-title"></h2>
+            <p id="modal-description"></p>
+            <p id="modal-price"></p>
+            <div class="modal-actions">
+                <button onclick="buyNow()">Buy Now</button>
+                <button onclick="addToCart()">Add to Cart</button>
+                <button onclick="goToCart()">Go to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedProduct = {};
+        function openModal(title, description, price, imageUrl) {
+            selectedProduct = { title, description, price, imageUrl };
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-description').innerText = description;
+            document.getElementById('modal-price').innerText = `Price: ₹${price}`;
+            document.getElementById('modal-image').src = imageUrl;
+            document.getElementById('product-modal').style.display = 'flex';
+        }
+        function closeModal() {
+            document.getElementById('product-modal').style.display = 'none';
+        }
+        function addToCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(selectedProduct);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            window.location.href = 'cart.html';
+        }
+        function goToCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                alert('No items added yet!');
+            } else {
+                window.location.href = 'cart.html';
+            }
+        }
+        function buyNow() {
+            localStorage.setItem('selectedProduct', JSON.stringify(selectedProduct));
+            window.location.href = 'buy-now.html';
+        }
+    </script>
+</body>
+</html>
